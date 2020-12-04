@@ -1,5 +1,6 @@
 import { useState } from 'react'
-const ContactForm = () => {
+
+const ContactForm = (props) => {
     const initialValues = {
         fullname: '',
         mobile: '',
@@ -17,8 +18,13 @@ const ContactForm = () => {
         })
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        props.addOrEdit(values)
+    }
+
     return (
-        <form autoComplete='off'>
+        <form autoComplete='off' onSubmit={handleSubmit}>
             <div className='row'>
                 <label htmlFor='fullname'>
                     Name:{' '}
@@ -54,6 +60,9 @@ const ContactForm = () => {
                         onChange={handleInput}
                     />
                 </label>
+            </div>
+            <div className='row'>
+                <input type='submit' value='submit' />
             </div>
         </form>
     )
