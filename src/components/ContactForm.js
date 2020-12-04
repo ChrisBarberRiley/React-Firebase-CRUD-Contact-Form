@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const ContactForm = (props) => {
+const ContactForm = ({ addOrEdit, currentId, users }) => {
     const initialValues = {
         fullname: '',
         mobile: '',
@@ -8,6 +8,18 @@ const ContactForm = (props) => {
     }
 
     const [values, setValues] = useState(initialValues)
+
+    useEffect(() => {
+        if (currentId === '') {
+            setValues({
+                ...initialValues,
+            })
+        } else {
+            setValues({
+                ...users[currentId],
+            })
+        }
+    }, [currentId, users])
 
     const handleInput = (e) => {
         const { name, value } = e.target
@@ -20,7 +32,7 @@ const ContactForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        props.addOrEdit(values)
+        addOrEdit(values)
     }
 
     return (
@@ -32,7 +44,7 @@ const ContactForm = (props) => {
                         type='text'
                         name='fullname'
                         id='fullname'
-                        value={values.fullName}
+                        value={values.fullname}
                         onChange={handleInput}
                     />
                 </label>
@@ -62,7 +74,10 @@ const ContactForm = (props) => {
                 </label>
             </div>
             <div className='row'>
-                <input type='submit' value='submit' />
+                <input
+                    type='submit'
+                    value={currentId === '' ? 'Submit' : 'Save'}
+                />
             </div>
         </form>
     )
