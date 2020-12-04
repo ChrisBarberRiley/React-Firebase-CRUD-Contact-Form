@@ -1,14 +1,16 @@
 import firebase from 'firebase'
 
+console.log('Firebase file loaded')
+
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: 'AIzaSyBXEm_unZUHuyCgF5_kPa-bEDvVM1TkaZ0',
+    apiKey: process.env.REACT_APP_apiKey,
     authDomain: 'rjs-auth.firebaseapp.com',
-    databaseURL: 'https://rjs-auth-default-rtdb.firebaseio.com',
+    databaseURL: process.env.REACT_APP_databaseURL,
     projectId: 'rjs-auth',
     storageBucket: 'rjs-auth.appspot.com',
-    messagingSenderId: '562627472702',
-    appId: '1:562627472702:web:b2d615ce57a51e2e5ed06f',
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId,
 }
 // Initialize Firebase
 const fireDb = firebase.initializeApp(firebaseConfig)
